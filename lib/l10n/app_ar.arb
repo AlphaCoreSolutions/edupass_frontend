@@ -1,0 +1,182 @@
+{
+    "@@locale": "ar",
+    "welcome": "مرحبًا بك 👋",
+    "noStudents": "لا يوجد أبناء مرتبطين بالحساب",
+    "addStudent": "إضافة طالب",
+    "grade": "الصف",
+    "idNumber": "رقم الهوية",
+    "gender": "الجنس",
+    "male": "ذكر",
+    "female": "أنثى",
+    "latestRequest": "آخر طلب",
+    "cancelNotice": "يمكنك إلغاء الطلب قبل الموافقة",
+    "cancel": "إلغاء",
+    "requestCanceled": "تم إلغاء الطلب",
+    "generatePdf": "توليد بطاقة الانصراف",
+    "requestDismissal": "طلب انصراف",
+    "requestEarlyLeave": "طلب استئذان",
+    "requestHistory": "سجل الطلبات:",
+    "pending": "قيد الانتظار",
+    "approved": "موافقة",
+    "rejected": "مرفوض",
+    "completed": "تم الانصراف",
+    "dismissal": "انصراف",
+    "earlyLeave": "استئذان",
+    "children": "أبنائي",
+    "requests": "الطلبات",
+    "account": "الحساب",
+    "myRequests": "طلباتي",
+    "noRequestsYet": "لا توجد طلبات حتى الآن",
+    "settings": "الإعدادات",
+    "username": "اسم المستخدم",
+    "parentExperimental": "ولي الأمر (تجريبي)",
+    "clearRequests": "مسح كل الطلبات",
+    "requestsCleared": "تم مسح الطلبات",
+    "logout": "تسجيل الخروج",
+    "adminPanel": "لوحة الإدارة",
+    "studentName": "الطالبة",
+    "requestType": "نوع الطلب",
+    "requestStatus": "الحالة",
+    "reason": "السبب",
+    "typeDismissal": "انصراف",
+    "typeEarlyLeave": "استئذان",
+    "statusPending": "قيد الانتظار",
+    "statusApproved": "تمت الموافقة",
+    "statusRejected": "مرفوض",
+    "statusCompleted": "تم الانصراف",
+    "gateTitle": "بوابة المدرسة",
+    "gateNoStudents": "لا يوجد طالبات جاهزات للخروج",
+    "gateExitSuccess": "{name} خرجت من البوابة ✅",
+    "@gateExitSuccess": {
+        "description": "Message shown when a student exits through the gate; includes the student's name",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "سارة"
+            }
+        }
+    },
+    "gateExitError": "حدث خطأ أثناء تحديث حالة الطلب",
+    "exitDone": "تم الخروج",
+    "scanQR": "مسح QR ولي الأمر",
+    "unknown": "غير معروف",
+    "qrInvalid": "الرمز غير صالح",
+    "qrNotFound": "الطلب غير موجود",
+    "qrNotApproved": "الطلب ليس في حالة موافقة",
+    "qrStudentNotFound": "الطالبة غير موجودة",
+    "qrConfirmExit": "تأكيد الخروج",
+    "qrConfirmExitMessage": "تأكيد خروج {name} من البوابة؟",
+    "@qrConfirmExitMessage": {
+        "description": "Message shown when confirming student exit through the gate",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "سارة"
+            }
+        }
+    },
+    "qrExitSuccess": "{name} خرجت من البوابة ✅",
+    "@qrExitSuccess": {
+        "description": "Message shown when a student successfully exits through the gate",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "سارة"
+            }
+        }
+    },
+    "confirm": "تأكيد",
+    "supervisorTitle": "واجهة المشرفة",
+    "supervisorNoRequests": "لا توجد طلبات نشطة",
+    "studentGrade": "الصف",
+    "studentId": "الهوية",
+    "studentGender": "الجنس",
+    "requestReason": "السبب",
+    "actionApprove": "موافقة",
+    "actionReject": "رفض",
+    "actionComplete": "تم الخروج",
+    "genderMale": "ذكر",
+    "genderFemale": "أنثى",
+    "smartDisplayTitle": "📢 النداء الذكي",
+    "smartDisplayEmpty": "لا توجد طالبات تمت الموافقة على خروجهن حاليًا",
+    "adminDashboard": "لوحة الإدارة",
+    "totalStudents": "عدد الطلاب",
+    "totalRequests": "الطلبات الكلية",
+    "pendingRequests": "طلبات معلقة",
+    "requestLog": "سجل الطلبات",
+    "exit": "خروج",
+    "statsChart": "الرسم البياني للإحصائيات",
+    "exportData": "تصدير البيانات",
+    "exportSuccess": "تم تصدير البيانات بنجاح",
+    "userManagement": "إدارة المستخدمين",
+    "addUser": "إضافة مستخدم",
+    "addNewUser": "إضافة مستخدم جديد",
+    "name": "الاسم",
+    "role": "الدور",
+    "add": "إضافة",
+    "delete": "حذف",
+    "changeRole": "تغيير الدور",
+    "noUsers": "لا يوجد مستخدمون",
+    "filterByRole": "تصفية حسب الدور",
+    "all": "الكل",
+    "userAdded": "تمت إضافة المستخدم",
+    "userDeleted": "تم حذف {name}",
+    "@userDeleted": {
+        "description": "Message shown when a user is deleted; includes the user's name",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "أحمد"
+            }
+        }
+    },
+    "editUser": "تعديل المستخدم",
+    "search": "بحث...",
+    "roleParent": "ولي أمر",
+    "roleSupervisor": "مشرفة",
+    "roleAdmin": "مديرة",
+    "userUpdated": "تم تحديث المستخدم بنجاح {name}",
+    "@userUpdated": {
+        "description": "Message shown when a user is updated; includes the user's name",
+        "placeholders": {
+            "name": {
+                "type": "String",
+                "example": "أحمد"
+            }
+        }
+    },
+    "loginSelectRole": "اختر دورك لتسجيل الدخول",
+    "roleGate": "بوابة",
+    "schoolAppTitle": "نظام الانصراف المدرسي",
+    "loadingDots": "جاري التحميل...",
+    "nationalId": "رقم الهوية الوطنية",
+    "selectPhoto": "اختيار صورة",
+    "requiredField": "مطلوب",
+    "studentAdded": "تمت إضافة الطالب",
+    "language": "اللغة",
+    "languageEnglish": "الإنجليزية",
+    "languageArabic": "العربية",
+    "dismissalCardTitle": "بطاقة الانصراف",
+    "photo": "الصورة",
+    "requestedBy": "مقدم الطلب",
+    "requestTime": "وقت تقديم الطلب",
+    "currentStatus": "الحالة الحالية",
+    "attachment": "المرفق",
+    "qrCodeLabel": "رمز الاستلام (QR)",
+    "pdfDisclaimerLine1": "هذا المستند يولد آليًا ولا يحتاج إلى توقيع.",
+    "pdfDisclaimerLine2": "يرجى إبراز هذا المستند عند الخروج من البوابة.",
+    "errorTryAgain": "حدث خطأ. يرجى المحاولة مرة أخرى.",
+    "areYouSure": "هل أنت متأكد؟",
+    "lookupsNotReady": "لم يتم تحميل بيانات القائمة بعد",
+    "alreadyHasPending": "للطالبة طلب قيد الانتظار بالفعل",
+    "selectReason": "يرجى اختيار سبب الاستئذان",
+    "requestSent": "تم إرسال الطلب",
+    "noteOptional": "ملاحظة (اختياري)",
+    "send": "إرسال",
+    "selectUser": "اختر المستخدم",
+    "refresh": "تحديث",
+    "login": "تسجيل الدخول",
+    "continueWithoutAccount": "متابعة بدون حساب",
+    "requestFailed": "فشل إرسال الطلب",
+    "sending": "جارٍ الإرسال…"
+}
