@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:edupass/core/models/lookup.dart';
 import 'package:edupass/core/models/pickupRequest.dart';
 import 'package:edupass/core/models/student.dart';
@@ -54,6 +56,16 @@ class ApiService {
 
   Future<void> deleteUser(int id) async {
     await _http.delete('/user/delete/$id');
+  }
+
+  Future<List<Map<String, dynamic>>> searchUsers(String sql) async {
+    // send a raw JSON string (already encoded with quotes):
+    final data = await _http.post(
+      '/user/advancedSearch',
+      body: jsonEncode(sql), // produces: "\"select * from Users ...\""
+      raw: true, // <-- important: don't jsonEncode again
+    );
+    return (data as List).cast<Map<String, dynamic>>();
   }
 
   // ---------- Requests ----------

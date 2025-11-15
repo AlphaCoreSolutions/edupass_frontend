@@ -1,5 +1,6 @@
 // lib/main.dart
 import 'package:edupass/features/admin/views/admin_dashboard_screen.dart';
+import 'package:edupass/features/admin/views/bus_enrollment_management_screen.dart';
 import 'package:edupass/features/admin/views/user_management_screen.dart';
 import 'package:edupass/features/auth/views/login_screen.dart';
 import 'package:edupass/features/parent/views/add_student_screen.dart';
@@ -17,6 +18,12 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'core/state/app_state.dart';
 import 'features/auth/views/splash_screen.dart';
+
+// 🔹 NEW: imports for new feature screens
+import 'package:edupass/features/admin/views/bus_management_screen.dart';
+import 'package:edupass/features/school/views/supervisor_bus_assign_screen.dart';
+import 'package:edupass/features/parent/views/bus_join_screen.dart';
+import 'package:edupass/features/parent/views/authorized_people_screen.dart';
 
 final scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -47,11 +54,15 @@ class _SchoolAppState extends State<SchoolApp> {
       routes: [
         GoRoute(path: '/splash', builder: (_, __) => const SplashScreen()),
         GoRoute(path: '/', builder: (_, __) => const LoginScreen()),
+
+        // Parent area
         GoRoute(path: '/parent', builder: (_, __) => const ParentMainScreen()),
         GoRoute(
           path: '/add-student',
           builder: (_, __) => const AddStudentScreen(),
         ),
+
+        // Supervisor area
         GoRoute(
           path: '/supervisor',
           builder: (_, __) => const SupervisorHomeScreen(),
@@ -65,6 +76,8 @@ class _SchoolAppState extends State<SchoolApp> {
           path: '/display',
           builder: (_, __) => const SmartDisplayScreen(),
         ),
+
+        // Admin area
         GoRoute(
           path: '/admin',
           builder: (_, __) => const AdminDashboardScreen(),
@@ -74,6 +87,31 @@ class _SchoolAppState extends State<SchoolApp> {
           path: '/users',
           builder: (_, __) => const UserManagementScreen(),
         ),
+
+        // 🔹 NEW: Buses and related flows
+        GoRoute(
+          path: '/buses',
+          builder: (_, __) => const BusManagementScreen(),
+        ),
+        GoRoute(
+          path: '/assign-bus',
+          builder: (_, __) => const SupervisorBusAssignScreen(),
+        ),
+
+        // NOTE: replace the hardcoded `1` with the actual logged-in parent id from your auth state when available.
+        GoRoute(
+          path: '/parent-buses',
+          builder: (_, __) => const ParentBusJoinScreen(parentUserId: 1),
+        ),
+        GoRoute(
+          path: '/auth-people',
+          builder: (_, __) => const AuthorizedPeopleScreen(parentUserId: 1),
+        ),
+
+        GoRoute(
+          path: '/bus-requests',
+          builder: (_, __) => const BusEnrollmentManagementScreen(),
+        ),
       ],
     );
   }
@@ -82,7 +120,7 @@ class _SchoolAppState extends State<SchoolApp> {
   Widget build(BuildContext context) {
     final locale = context
         .watch<AppState>()
-        .locale; // this rebuilds MaterialApp, not the router
+        .locale; // rebuilds MaterialApp, not the router
     return MaterialApp.router(
       localizationsDelegates: const [
         AppLocalizations.delegate,

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:edupass/core/models/pickupRequest.dart';
 import 'package:edupass/core/models/student.dart';
 import 'package:edupass/core/models/user.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,6 +14,11 @@ import 'package:edupass/core/models/lookup.dart';
 
 import 'package:edupass/core/services/api_handler.dart';
 import 'package:edupass/core/services/http_client.dart';
+
+import 'package:edupass/core/models/bus.dart';
+import 'package:edupass/core/models/bus_enrollment.dart';
+import 'package:edupass/core/models/authorized_person.dart';
+import 'package:edupass/core/models/door_event.dart';
 
 class AppState extends ChangeNotifier {
   // Use devInsecure for local backend with self-signed certs
@@ -209,6 +215,62 @@ class AppState extends ChangeNotifier {
     return u.id == -1 ? null : u.name;
   }
 
+  Future<List<UserApi>> searchUsers(String sql) async {
+    if (kDebugMode) {
+      debugPrint('[searchUsers] ▶ query="$sql"');
+    }
+
+    final sw = Stopwatch()..start();
+    try {
+      final raw = await api.searchUsers(sql);
+
+      if (kDebugMode) {
+        debugPrint(
+          '[searchUsers] ✔ http OK in ${sw.elapsedMilliseconds}ms • rows=${raw.length}',
+        );
+        if (raw.isNotEmpty) {
+          // printing a single sample row to avoid flooding logs
+          debugPrint('[searchUsers]   sample row: ${raw.first}');
+        }
+      }
+
+      final users = <UserApi>[];
+      for (final m in raw) {
+        try {
+          users.add(UserApi.fromJson(m));
+        } catch (e, st) {
+          if (kDebugMode) {
+            debugPrint('[searchUsers] ⚠ map error: $e\npayload: $m');
+            debugPrint('$st');
+          }
+          rethrow; // fail fast so you see invalid payloads
+        }
+      }
+
+      if (kDebugMode) {
+        final roleCounts = <int, int>{};
+        for (final u in users) {
+          roleCounts[u.roleId] = (roleCounts[u.roleId] ?? 0) + 1;
+        }
+        debugPrint(
+          '[searchUsers] ✔ parsed=${users.length} • roleCounts=$roleCounts',
+        );
+      }
+
+      return users;
+    } catch (e, st) {
+      if (kDebugMode) {
+        debugPrint('[searchUsers] ✖ ERROR: $e');
+        debugPrint('$st');
+      }
+      rethrow;
+    } finally {
+      if (kDebugMode) {
+        debugPrint('[searchUsers] ⏱ done in ${sw.elapsedMilliseconds}ms');
+      }
+    }
+  }
+
   // =========================
   // Requests (API-backed + Cache)
   // =========================
@@ -319,6 +381,262 @@ class AppState extends ChangeNotifier {
   }
 
   // =========================
+  // Buses + Enrollment + Authorized + Door (Local cache)
+  // =========================
+  List<BusApi> buses = [];
+  List<BusEnrollmentApi> busEnrollments = [];
+  List<AuthorizedPickupPersonApi> authorizedPeople = [];
+  List<DoorEventApi> doorEvents = [];
+
+  static const _kBusesKey = 'cache_buses_v1';
+  static const _kEnrollKey = 'cache_bus_enrollments_v1';
+  static const _kAuthPeopleKey = 'cache_auth_people_v1';
+  static const _kDoorKey = 'cache_door_events_v1';
+
+  // ---- Buses ----
+
+  Future<void> loadBuses() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_kBusesKey);
+    if (raw != null) {
+      try {
+        final list = (jsonDecode(raw) as List)
+            .map((e) => BusApi.fromJson(e as Map<String, dynamic>))
+            .toList();
+        buses = list;
+      } catch (_) {}
+    }
+    notifyListeners();
+  }
+
+  Future<void> saveBuses() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      _kBusesKey,
+      jsonEncode(buses.map((e) => e.toJson()).toList()),
+    );
+  }
+
+  // ---- Bus Enrollments ----
+  Future<void> loadBusEnrollments() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_kEnrollKey);
+    if (raw != null) {
+      try {
+        busEnrollments = (jsonDecode(raw) as List)
+            .map((e) => BusEnrollmentApi.fromJson(e as Map<String, dynamic>))
+            .toList();
+      } catch (_) {}
+    }
+    notifyListeners();
+  }
+
+  Future<void> saveBusEnrollments() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      _kEnrollKey,
+      jsonEncode(busEnrollments.map((e) => e.toJson()).toList()),
+    );
+  }
+
+  // ---- Authorized People ----
+  Future<void> loadAuthorizedPeople() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_kAuthPeopleKey);
+    if (raw != null) {
+      try {
+        authorizedPeople = (jsonDecode(raw) as List)
+            .map(
+              (e) =>
+                  AuthorizedPickupPersonApi.fromJson(e as Map<String, dynamic>),
+            )
+            .toList();
+      } catch (_) {}
+    }
+    notifyListeners();
+  }
+
+  Future<void> saveAuthorizedPeople() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      _kAuthPeopleKey,
+      jsonEncode(authorizedPeople.map((e) => e.toJson()).toList()),
+    );
+  }
+
+  // ---- Door Events ----
+  Future<void> loadDoorEvents() async {
+    final prefs = await SharedPreferences.getInstance();
+    final raw = prefs.getString(_kDoorKey);
+    if (raw != null) {
+      try {
+        doorEvents = (jsonDecode(raw) as List)
+            .map((e) => DoorEventApi.fromJson(e as Map<String, dynamic>))
+            .toList();
+      } catch (_) {}
+    }
+    notifyListeners();
+  }
+
+  Future<void> saveDoorEvents() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString(
+      _kDoorKey,
+      jsonEncode(doorEvents.map((e) => e.toJson()).toList()),
+    );
+  }
+
+  // ========= Buses =========
+  Future<void> addOrUpdateBus(BusApi bus) async {
+    final i = buses.indexWhere((b) => b.id == bus.id);
+    if (i == -1) {
+      buses.add(bus);
+    } else {
+      buses[i] = bus;
+    }
+    notifyListeners();
+    await saveBuses();
+  }
+
+  Future<void> deleteBus(int busId) async {
+    buses.removeWhere((b) => b.id == busId);
+    // cascade unenrollments for this bus
+    busEnrollments.removeWhere((e) => e.busId == busId);
+    notifyListeners();
+    await saveBuses();
+    await saveBusEnrollments();
+  }
+
+  // ======== Enrollments ========
+  int _nextEnrollId() => busEnrollments.isEmpty
+      ? 1
+      : (busEnrollments.map((e) => e.id).reduce((a, b) => a > b ? a : b) + 1);
+
+  Future<BusEnrollmentApi> parentRequestJoinBus({
+    required int studentId,
+    required int busId,
+    required int parentUserId,
+  }) async {
+    final e = BusEnrollmentApi(
+      id: _nextEnrollId(),
+      studentId: studentId,
+      busId: busId,
+      requestedById: parentUserId,
+      requestedAt: DateTime.now().toUtc(),
+      status: BusJoinStatus.pending,
+    );
+    busEnrollments.add(e);
+    notifyListeners();
+    await saveBusEnrollments();
+    return e;
+  }
+
+  Future<void> supervisorApproveEnrollment(int enrollmentId) async {
+    final i = busEnrollments.indexWhere((x) => x.id == enrollmentId);
+    if (i == -1) return;
+    busEnrollments[i] = busEnrollments[i].copyWith(
+      status: BusJoinStatus.approvedAwaitingPayment,
+    );
+    notifyListeners();
+    await saveBusEnrollments();
+  }
+
+  Future<void> rejectEnrollment(int enrollmentId) async {
+    final i = busEnrollments.indexWhere((x) => x.id == enrollmentId);
+    if (i == -1) return;
+    busEnrollments[i] = busEnrollments[i].copyWith(
+      status: BusJoinStatus.rejected,
+    );
+    notifyListeners();
+    await saveBusEnrollments();
+  }
+
+  // Mock payment → mark paid (assignment inferred by status)
+  Future<void> completePaymentAndAssign({
+    required int enrollmentId,
+    required String paymentRef,
+  }) async {
+    final i = busEnrollments.indexWhere((x) => x.id == enrollmentId);
+    if (i == -1) return;
+    busEnrollments[i] = busEnrollments[i].copyWith(
+      status: BusJoinStatus.paid,
+      paymentRef: paymentRef,
+    );
+    notifyListeners();
+    await saveBusEnrollments();
+  }
+
+  List<int> busIdsOfStudent(int studentId) {
+    return busEnrollments
+        .where(
+          (e) => e.studentId == studentId && e.status == BusJoinStatus.paid,
+        )
+        .map((e) => e.busId)
+        .toList();
+  }
+
+  // ===== Authorized People =====
+  // ignore: unused_element
+  int _nextAuthId() => authorizedPeople.isEmpty
+      ? 1
+      : (authorizedPeople.map((e) => e.id).reduce((a, b) => a > b ? a : b) + 1);
+
+  Future<void> addAuthorizedPerson(AuthorizedPickupPersonApi p) async {
+    // upsert by id
+    final i = authorizedPeople.indexWhere((x) => x.id == p.id);
+    if (i == -1) {
+      authorizedPeople.add(p);
+    } else {
+      authorizedPeople[i] = p;
+    }
+    notifyListeners();
+    await saveAuthorizedPeople();
+  }
+
+  Future<void> removeAuthorizedPerson(int id) async {
+    authorizedPeople.removeWhere((x) => x.id == id);
+    notifyListeners();
+    await saveAuthorizedPeople();
+  }
+
+  List<AuthorizedPickupPersonApi> authorizedForStudent(int studentId) =>
+      authorizedPeople.where((p) => p.studentId == studentId).toList();
+
+  // ===== Door Events (البواب) =====
+  int _nextDoorId() => doorEvents.isEmpty
+      ? 1
+      : (doorEvents.map((e) => e.id).reduce((a, b) => a > b ? a : b) + 1);
+
+  Future<void> logDoorExit({
+    required int studentId,
+    required int pickedByType, // 0 Parent, 1 Authorized, 2 Bus
+    int? pickedById,
+    String? note,
+  }) async {
+    doorEvents.add(
+      DoorEventApi(
+        id: _nextDoorId(),
+        studentId: studentId,
+        pickedByType: pickedByType,
+        pickedById: pickedById,
+        time: DateTime.now().toUtc(),
+        note: note,
+      ),
+    );
+    notifyListeners();
+    await saveDoorEvents();
+  }
+
+  //helpers
+  String? findUserNameById(int userId) {
+    final u = users.firstWhere(
+      (x) => x.id == userId,
+      orElse: () => UserApi(id: -1, name: '', roleId: 0),
+    );
+    return u.id == -1 ? null : u.name;
+  }
+
+  // =========================
   // Bulk loaders
   // =========================
   Future<void> loadAll() async {
@@ -327,6 +645,10 @@ class AppState extends ChangeNotifier {
       loadStudents(),
       loadUsers(),
       loadRequests(),
+      loadBuses(),
+      loadBusEnrollments(),
+      loadAuthorizedPeople(),
+      loadDoorEvents(),
     ]);
   }
 }

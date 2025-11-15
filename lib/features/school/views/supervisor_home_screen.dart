@@ -171,6 +171,12 @@ class SupervisorHomeScreen extends StatelessWidget {
                   },
                 ),
         ),
+        // ✅ New: quick access to Assign-to-Bus screen
+        floatingActionButton: FloatingActionButton.extended(
+          icon: const Icon(Icons.directions_bus_outlined),
+          label: const Text('إسناد حافلة / Assign Bus'),
+          onPressed: () => context.push('/assign-bus'),
+        ),
       ),
     );
   }

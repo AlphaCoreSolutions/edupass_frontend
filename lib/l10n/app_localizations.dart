@@ -904,6 +904,726 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Sending...'**
   String get sending;
+
+  /// No description provided for @filtersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filtersTitle;
+
+  /// No description provided for @selectStudent.
+  ///
+  /// In en, this message translates to:
+  /// **'Select student'**
+  String get selectStudent;
+
+  /// No description provided for @status.
+  ///
+  /// In en, this message translates to:
+  /// **'Status'**
+  String get status;
+
+  /// No description provided for @resetFilters.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get resetFilters;
+
+  /// No description provided for @adminShortcutsBusesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Official Buses'**
+  String get adminShortcutsBusesTitle;
+
+  /// No description provided for @adminShortcutsBusesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage buses, schedules and fees'**
+  String get adminShortcutsBusesSubtitle;
+
+  /// No description provided for @adminShortcutsBusRequestsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus Join Requests'**
+  String get adminShortcutsBusRequestsTitle;
+
+  /// No description provided for @adminShortcutsBusRequestsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Review, approve/reject and activate paid'**
+  String get adminShortcutsBusRequestsSubtitle;
+
+  /// No description provided for @busesStatsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus Analytics'**
+  String get busesStatsTitle;
+
+  /// No description provided for @neighborhood.
+  ///
+  /// In en, this message translates to:
+  /// **'Neighborhood'**
+  String get neighborhood;
+
+  /// No description provided for @supervisorId.
+  ///
+  /// In en, this message translates to:
+  /// **'Supervisor ID'**
+  String get supervisorId;
+
+  /// No description provided for @downloadCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'Export CSV'**
+  String get downloadCsv;
+
+  /// No description provided for @exportFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'Export failed'**
+  String get exportFailed;
+
+  /// No description provided for @permissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'Permission denied'**
+  String get permissionDenied;
+
+  /// No description provided for @currencySarShort.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR'**
+  String get currencySarShort;
+
+  /// No description provided for @monthlyFeeShort.
+  ///
+  /// In en, this message translates to:
+  /// **'SAR/month'**
+  String get monthlyFeeShort;
+
+  /// No description provided for @busGoTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Go'**
+  String get busGoTime;
+
+  /// No description provided for @busReturnTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Return'**
+  String get busReturnTime;
+
+  /// No description provided for @busesCountFiltered.
+  ///
+  /// In en, this message translates to:
+  /// **'Buses (filtered)'**
+  String get busesCountFiltered;
+
+  /// No description provided for @awaitingPaymentCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting payment'**
+  String get awaitingPaymentCount;
+
+  /// No description provided for @paidActiveCount.
+  ///
+  /// In en, this message translates to:
+  /// **'Active (paid)'**
+  String get paidActiveCount;
+
+  /// No description provided for @estimatedMonthlyRevenue.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated monthly revenue'**
+  String get estimatedMonthlyRevenue;
+
+  /// No description provided for @noBusChartData.
+  ///
+  /// In en, this message translates to:
+  /// **'No bus data to chart'**
+  String get noBusChartData;
+
+  /// No description provided for @activeSubscribersPerBus.
+  ///
+  /// In en, this message translates to:
+  /// **'Active subscribers per bus'**
+  String get activeSubscribersPerBus;
+
+  /// No description provided for @awaitingPerBus.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting payment per bus'**
+  String get awaitingPerBus;
+
+  /// No description provided for @activeShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get activeShort;
+
+  /// No description provided for @awaitingShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting'**
+  String get awaitingShort;
+
+  /// No description provided for @quickDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Quick details'**
+  String get quickDetails;
+
+  /// No description provided for @activeSubscribers.
+  ///
+  /// In en, this message translates to:
+  /// **'Active subscribers'**
+  String get activeSubscribers;
+
+  /// No description provided for @awaitingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting payment'**
+  String get awaitingPayment;
+
+  /// No description provided for @noItems.
+  ///
+  /// In en, this message translates to:
+  /// **'No items'**
+  String get noItems;
+
+  /// No description provided for @parent.
+  ///
+  /// In en, this message translates to:
+  /// **'Parent'**
+  String get parent;
+
+  /// No description provided for @reference.
+  ///
+  /// In en, this message translates to:
+  /// **'Ref'**
+  String get reference;
+
+  /// No description provided for @exportBusCsv.
+  ///
+  /// In en, this message translates to:
+  /// **'Export bus enrollments CSV'**
+  String get exportBusCsv;
+
+  /// No description provided for @busRequestsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus Join Requests'**
+  String get busRequestsTitle;
+
+  /// No description provided for @busStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get busStatusPending;
+
+  /// No description provided for @busStatusApprovedAwaitingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved, awaiting payment'**
+  String get busStatusApprovedAwaitingPayment;
+
+  /// No description provided for @busStatusPaid.
+  ///
+  /// In en, this message translates to:
+  /// **'Active (paid)'**
+  String get busStatusPaid;
+
+  /// No description provided for @busStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get busStatusRejected;
+
+  /// No description provided for @busStatusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get busStatusCancelled;
+
+  /// No description provided for @searchStudentOrBus.
+  ///
+  /// In en, this message translates to:
+  /// **'Search by student / bus'**
+  String get searchStudentOrBus;
+
+  /// No description provided for @clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// No description provided for @noResults.
+  ///
+  /// In en, this message translates to:
+  /// **'No results'**
+  String get noResults;
+
+  /// No description provided for @request.
+  ///
+  /// In en, this message translates to:
+  /// **'Request'**
+  String get request;
+
+  /// No description provided for @paymentRef.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment ref'**
+  String get paymentRef;
+
+  /// No description provided for @paymentRefHint.
+  ///
+  /// In en, this message translates to:
+  /// **'e.g., TXN-12345'**
+  String get paymentRefHint;
+
+  /// No description provided for @approve.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approve;
+
+  /// No description provided for @reject.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get reject;
+
+  /// No description provided for @activatePaidManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Activate manually (paid)'**
+  String get activatePaidManually;
+
+  /// No description provided for @rejectAfterApproval.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject after approval'**
+  String get rejectAfterApproval;
+
+  /// No description provided for @noAction.
+  ///
+  /// In en, this message translates to:
+  /// **'No action'**
+  String get noAction;
+
+  /// No description provided for @busManageTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Official Bus Management'**
+  String get busManageTitle;
+
+  /// No description provided for @addedBuses.
+  ///
+  /// In en, this message translates to:
+  /// **'Added buses'**
+  String get addedBuses;
+
+  /// No description provided for @noBuses.
+  ///
+  /// In en, this message translates to:
+  /// **'No buses added yet'**
+  String get noBuses;
+
+  /// No description provided for @addBusHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Use the form below to add a new bus'**
+  String get addBusHint;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
+
+  /// No description provided for @addBus.
+  ///
+  /// In en, this message translates to:
+  /// **'Add bus'**
+  String get addBus;
+
+  /// No description provided for @editBus.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit bus'**
+  String get editBus;
+
+  /// No description provided for @editMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit mode'**
+  String get editMode;
+
+  /// No description provided for @saveChanges.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get saveChanges;
+
+  /// No description provided for @busName.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus name'**
+  String get busName;
+
+  /// No description provided for @routeDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Route description'**
+  String get routeDescription;
+
+  /// No description provided for @goTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Go'**
+  String get goTimeLabel;
+
+  /// No description provided for @returnTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Return'**
+  String get returnTimeLabel;
+
+  /// No description provided for @monthlyFee.
+  ///
+  /// In en, this message translates to:
+  /// **'Monthly fee'**
+  String get monthlyFee;
+
+  /// No description provided for @busSupervisorId.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus supervisor ID'**
+  String get busSupervisorId;
+
+  /// No description provided for @required.
+  ///
+  /// In en, this message translates to:
+  /// **'Required'**
+  String get required;
+
+  /// No description provided for @invalidValue.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid value'**
+  String get invalidValue;
+
+  /// No description provided for @invalidNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid number'**
+  String get invalidNumber;
+
+  /// No description provided for @invalidTimeFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid format, e.g. 06:45'**
+  String get invalidTimeFormat;
+
+  /// No description provided for @invalidTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid time'**
+  String get invalidTime;
+
+  /// No description provided for @selectOperatingDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select operating days'**
+  String get selectOperatingDays;
+
+  /// No description provided for @addedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Added successfully'**
+  String get addedSuccess;
+
+  /// No description provided for @savedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved successfully'**
+  String get savedSuccess;
+
+  /// No description provided for @clearForm.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear form'**
+  String get clearForm;
+
+  /// No description provided for @pickTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick time'**
+  String get pickTime;
+
+  /// No description provided for @deleteBusTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete bus'**
+  String get deleteBusTitle;
+
+  /// No description provided for @deleteBusConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{name}\"?'**
+  String deleteBusConfirm(String name);
+
+  /// No description provided for @deleteAction.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get deleteAction;
+
+  /// No description provided for @loadedForEdit.
+  ///
+  /// In en, this message translates to:
+  /// **'Bus data loaded for editing'**
+  String get loadedForEdit;
+
+  /// No description provided for @weekdaySun.
+  ///
+  /// In en, this message translates to:
+  /// **'Sunday'**
+  String get weekdaySun;
+
+  /// No description provided for @weekdayMon.
+  ///
+  /// In en, this message translates to:
+  /// **'Monday'**
+  String get weekdayMon;
+
+  /// No description provided for @weekdayTue.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuesday'**
+  String get weekdayTue;
+
+  /// No description provided for @weekdayWed.
+  ///
+  /// In en, this message translates to:
+  /// **'Wednesday'**
+  String get weekdayWed;
+
+  /// No description provided for @weekdayThu.
+  ///
+  /// In en, this message translates to:
+  /// **'Thursday'**
+  String get weekdayThu;
+
+  /// No description provided for @weekdayFri.
+  ///
+  /// In en, this message translates to:
+  /// **'Friday'**
+  String get weekdayFri;
+
+  /// No description provided for @weekdaySat.
+  ///
+  /// In en, this message translates to:
+  /// **'Saturday'**
+  String get weekdaySat;
+
+  /// No description provided for @manualEntry.
+  ///
+  /// In en, this message translates to:
+  /// **'Manual Entry'**
+  String get manualEntry;
+
+  /// No description provided for @parentHomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'My Children'**
+  String get parentHomeTitle;
+
+  /// No description provided for @currentTransport.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Transport'**
+  String get currentTransport;
+
+  /// No description provided for @noBusAssigned.
+  ///
+  /// In en, this message translates to:
+  /// **'No bus assigned yet'**
+  String get noBusAssigned;
+
+  /// No description provided for @joinBus.
+  ///
+  /// In en, this message translates to:
+  /// **'Join a Bus'**
+  String get joinBus;
+
+  /// No description provided for @join.
+  ///
+  /// In en, this message translates to:
+  /// **'Join'**
+  String get join;
+
+  /// No description provided for @parentBusJoinTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'School Buses'**
+  String get parentBusJoinTitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a bus…'**
+  String get searchHint;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @busStatusAwaitPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting payment'**
+  String get busStatusAwaitPayment;
+
+  /// No description provided for @busStatusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get busStatusActive;
+
+  /// No description provided for @payAndActivate.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay & Activate'**
+  String get payAndActivate;
+
+  /// No description provided for @refreshShort.
+  ///
+  /// In en, this message translates to:
+  /// **'Refresh'**
+  String get refreshShort;
+
+  /// No description provided for @parentBusesTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'School Buses'**
+  String get parentBusesTitle;
+
+  /// No description provided for @parentBusesSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Browse buses, request to join, manage payments'**
+  String get parentBusesSubtitle;
+
+  /// No description provided for @authorizedPeopleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Authorized Pickups'**
+  String get authorizedPeopleTitle;
+
+  /// No description provided for @authorizedPeopleSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Add and manage trusted people to pick up your child'**
+  String get authorizedPeopleSubtitle;
+
+  /// No description provided for @active.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get active;
+
+  /// No description provided for @manage.
+  ///
+  /// In en, this message translates to:
+  /// **'Manage'**
+  String get manage;
+
+  /// Shows how many authorized pickup people are linked to the student
+  ///
+  /// In en, this message translates to:
+  /// **'Authorized people: {count}'**
+  String authorizedPeopleCount(int count);
+
+  /// No description provided for @requestJoinBus.
+  ///
+  /// In en, this message translates to:
+  /// **'Request to Join'**
+  String get requestJoinBus;
+
+  /// No description provided for @myBusRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'My Bus Requests'**
+  String get myBusRequests;
+
+  /// No description provided for @paymentActivated.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment completed. Enrollment activated.'**
+  String get paymentActivated;
+
+  /// No description provided for @statusAwaitingPayment.
+  ///
+  /// In en, this message translates to:
+  /// **'Awaiting Payment'**
+  String get statusAwaitingPayment;
+
+  /// No description provided for @statusActive.
+  ///
+  /// In en, this message translates to:
+  /// **'Active'**
+  String get statusActive;
+
+  /// No description provided for @statusCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get statusCancelled;
+
+  /// No description provided for @inactive.
+  ///
+  /// In en, this message translates to:
+  /// **'Inactive'**
+  String get inactive;
+
+  /// No description provided for @noActiveBus.
+  ///
+  /// In en, this message translates to:
+  /// **'No active bus'**
+  String get noActiveBus;
+
+  /// No description provided for @addAuthorizedPerson.
+  ///
+  /// In en, this message translates to:
+  /// **'Add Authorized Person'**
+  String get addAuthorizedPerson;
+
+  /// No description provided for @deleteConfirmName.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete \"{name}\"?'**
+  String deleteConfirmName(String name);
+
+  /// No description provided for @deletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Deleted successfully'**
+  String get deletedSuccess;
+
+  /// No description provided for @phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get phone;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

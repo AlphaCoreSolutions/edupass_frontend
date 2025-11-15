@@ -422,4 +422,370 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get sending => 'جارٍ الإرسال…';
+
+  @override
+  String get filtersTitle => 'الفلاتر';
+
+  @override
+  String get selectStudent => 'اختر الطالب';
+
+  @override
+  String get status => 'الحالة';
+
+  @override
+  String get resetFilters => 'إعادة تعيين';
+
+  @override
+  String get adminShortcutsBusesTitle => 'الحافلات الرسمية';
+
+  @override
+  String get adminShortcutsBusesSubtitle => 'إدارة الحافلات، الجداول والرسوم';
+
+  @override
+  String get adminShortcutsBusRequestsTitle => 'طلبات الانضمام للحافلات';
+
+  @override
+  String get adminShortcutsBusRequestsSubtitle => 'مراجعة، موافقة/رفض، وتفعيل مدفوع';
+
+  @override
+  String get busesStatsTitle => 'إحصائيات الحافلات';
+
+  @override
+  String get neighborhood => 'الحي';
+
+  @override
+  String get supervisorId => 'رقم المشرف';
+
+  @override
+  String get downloadCsv => 'تصدير CSV';
+
+  @override
+  String get exportFailed => 'فشل التصدير';
+
+  @override
+  String get permissionDenied => 'تم رفض الإذن';
+
+  @override
+  String get currencySarShort => 'ر.س';
+
+  @override
+  String get monthlyFeeShort => 'ر.س/شهر';
+
+  @override
+  String get busGoTime => 'ذهاب';
+
+  @override
+  String get busReturnTime => 'عودة';
+
+  @override
+  String get busesCountFiltered => 'عدد الحافلات (مطبق الفلاتر)';
+
+  @override
+  String get awaitingPaymentCount => 'بانتظار الدفع';
+
+  @override
+  String get paidActiveCount => 'نشطة (مدفوعة)';
+
+  @override
+  String get estimatedMonthlyRevenue => 'الإيراد الشهري التقديري';
+
+  @override
+  String get noBusChartData => 'لا توجد بيانات حافلات لعرض الرسوم البيانية';
+
+  @override
+  String get activeSubscribersPerBus => 'المشتركين النشطين لكل حافلة';
+
+  @override
+  String get awaitingPerBus => 'طلبات بانتظار الدفع لكل حافلة';
+
+  @override
+  String get activeShort => 'نشط';
+
+  @override
+  String get awaitingShort => 'بانتظار';
+
+  @override
+  String get quickDetails => 'تفاصيل سريعة';
+
+  @override
+  String get activeSubscribers => 'مشتركين نشطين';
+
+  @override
+  String get awaitingPayment => 'بانتظار الدفع';
+
+  @override
+  String get noItems => 'لا يوجد';
+
+  @override
+  String get parent => 'ولي الأمر';
+
+  @override
+  String get reference => 'المرجع';
+
+  @override
+  String get exportBusCsv => 'تصدير CSV لطلبات الحافلات';
+
+  @override
+  String get busRequestsTitle => 'طلبات الانضمام للحافلات';
+
+  @override
+  String get busStatusPending => 'قيد المراجعة';
+
+  @override
+  String get busStatusApprovedAwaitingPayment => 'موافق عليه بانتظار الدفع';
+
+  @override
+  String get busStatusPaid => 'مفعل (مدفوع)';
+
+  @override
+  String get busStatusRejected => 'مرفوض';
+
+  @override
+  String get busStatusCancelled => 'ملغي';
+
+  @override
+  String get searchStudentOrBus => 'بحث باسم الطالب / الحافلة';
+
+  @override
+  String get clear => 'مسح';
+
+  @override
+  String get noResults => 'لا توجد نتائج';
+
+  @override
+  String get request => 'طلب';
+
+  @override
+  String get paymentRef => 'مرجع الدفع';
+
+  @override
+  String get paymentRefHint => 'مثال: TXN-12345';
+
+  @override
+  String get approve => 'موافقة';
+
+  @override
+  String get reject => 'رفض';
+
+  @override
+  String get activatePaidManually => 'تفعيل يدوي (مدفوع)';
+
+  @override
+  String get rejectAfterApproval => 'رفض بعد الموافقة';
+
+  @override
+  String get noAction => 'لا يوجد إجراء';
+
+  @override
+  String get busManageTitle => 'إدارة الحافلات الرسمية';
+
+  @override
+  String get addedBuses => 'الحافلات المضافة';
+
+  @override
+  String get noBuses => 'لا توجد حافلات مضافة بعد';
+
+  @override
+  String get addBusHint => 'استخدم النموذج بالأسفل لإضافة حافلة جديدة';
+
+  @override
+  String get edit => 'تعديل';
+
+  @override
+  String get addBus => 'إضافة حافلة';
+
+  @override
+  String get editBus => 'تعديل حافلة';
+
+  @override
+  String get editMode => 'وضع التعديل';
+
+  @override
+  String get saveChanges => 'حفظ التعديلات';
+
+  @override
+  String get busName => 'اسم الحافلة';
+
+  @override
+  String get routeDescription => 'وصف المسار';
+
+  @override
+  String get goTimeLabel => 'الذهاب ';
+
+  @override
+  String get returnTimeLabel => 'العودة';
+
+  @override
+  String get monthlyFee => 'الرسوم الشهرية';
+
+  @override
+  String get busSupervisorId => 'رقم مشرف الحافلة';
+
+  @override
+  String get required => 'مطلوب';
+
+  @override
+  String get invalidValue => 'قيمة غير صالحة';
+
+  @override
+  String get invalidNumber => 'رقم غير صالح';
+
+  @override
+  String get invalidTimeFormat => 'صيغة غير صحيحة، مثال 06:45';
+
+  @override
+  String get invalidTime => 'وقت غير صالح';
+
+  @override
+  String get selectOperatingDays => 'يرجى اختيار أيام التشغيل';
+
+  @override
+  String get addedSuccess => 'تمت الإضافة';
+
+  @override
+  String get savedSuccess => 'تم الحفظ';
+
+  @override
+  String get clearForm => 'تفريغ النموذج';
+
+  @override
+  String get pickTime => 'اختر الوقت';
+
+  @override
+  String get deleteBusTitle => 'حذف الحافلة';
+
+  @override
+  String deleteBusConfirm(String name) {
+    return 'هل أنت متأكد من حذف \"$name\"؟';
+  }
+
+  @override
+  String get deleteAction => 'حذف';
+
+  @override
+  String get loadedForEdit => 'تم تحميل بيانات الحافلة للتعديل';
+
+  @override
+  String get weekdaySun => 'الأحد';
+
+  @override
+  String get weekdayMon => 'الاثنين';
+
+  @override
+  String get weekdayTue => 'الثلاثاء';
+
+  @override
+  String get weekdayWed => 'الأربعاء';
+
+  @override
+  String get weekdayThu => 'الخميس';
+
+  @override
+  String get weekdayFri => 'الجمعة';
+
+  @override
+  String get weekdaySat => 'السبت';
+
+  @override
+  String get manualEntry => 'إدخال يدوي';
+
+  @override
+  String get parentHomeTitle => 'أبنائي';
+
+  @override
+  String get currentTransport => 'وسيلة النقل الحالية';
+
+  @override
+  String get noBusAssigned => 'لا توجد حافلة مخصصة بعد';
+
+  @override
+  String get joinBus => 'الانضمام إلى حافلة';
+
+  @override
+  String get join => 'انضمام';
+
+  @override
+  String get parentBusJoinTitle => 'حافلات المدرسة';
+
+  @override
+  String get searchHint => 'ابحث عن حافلة…';
+
+  @override
+  String get reset => 'إعادة تعيين';
+
+  @override
+  String get busStatusAwaitPayment => 'بانتظار الدفع';
+
+  @override
+  String get busStatusActive => 'نشط';
+
+  @override
+  String get payAndActivate => 'دفع وتفعيل';
+
+  @override
+  String get refreshShort => 'تحديث';
+
+  @override
+  String get parentBusesTitle => 'الحافلات المدرسية';
+
+  @override
+  String get parentBusesSubtitle => 'تصفّح الحافلات، اطلب الانضمام، وأدِر المدفوعات';
+
+  @override
+  String get authorizedPeopleTitle => 'الأشخاص المصرّح لهم';
+
+  @override
+  String get authorizedPeopleSubtitle => 'أضف وأدر الأشخاص الموثوقين لاستلام طفلك';
+
+  @override
+  String get active => 'نشط';
+
+  @override
+  String get manage => 'إدارة';
+
+  @override
+  String authorizedPeopleCount(int count) {
+    return 'الأشخاص المصرّح لهم: $count';
+  }
+
+  @override
+  String get requestJoinBus => 'طلب الانضمام';
+
+  @override
+  String get myBusRequests => 'طلبات الحافلات الخاصة بي';
+
+  @override
+  String get paymentActivated => 'تم الدفع وتفعيل الاشتراك.';
+
+  @override
+  String get statusAwaitingPayment => 'بانتظار الدفع';
+
+  @override
+  String get statusActive => 'نشط';
+
+  @override
+  String get statusCancelled => 'ملغي';
+
+  @override
+  String get inactive => 'غير نشط';
+
+  @override
+  String get noActiveBus => 'لا توجد حافلة نشطة';
+
+  @override
+  String get addAuthorizedPerson => 'إضافة شخص مصرح';
+
+  @override
+  String deleteConfirmName(String name) {
+    return 'هل تريد حذف $name؟';
+  }
+
+  @override
+  String get deletedSuccess => 'تم الحذف';
+
+  @override
+  String get phone => 'الهاتف';
+
+  @override
+  String get fullName => 'الاسم الكامل';
 }

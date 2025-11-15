@@ -422,4 +422,370 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sending => 'Sending...';
+
+  @override
+  String get filtersTitle => 'Filters';
+
+  @override
+  String get selectStudent => 'Select student';
+
+  @override
+  String get status => 'Status';
+
+  @override
+  String get resetFilters => 'Reset';
+
+  @override
+  String get adminShortcutsBusesTitle => 'Official Buses';
+
+  @override
+  String get adminShortcutsBusesSubtitle => 'Manage buses, schedules and fees';
+
+  @override
+  String get adminShortcutsBusRequestsTitle => 'Bus Join Requests';
+
+  @override
+  String get adminShortcutsBusRequestsSubtitle => 'Review, approve/reject and activate paid';
+
+  @override
+  String get busesStatsTitle => 'Bus Analytics';
+
+  @override
+  String get neighborhood => 'Neighborhood';
+
+  @override
+  String get supervisorId => 'Supervisor ID';
+
+  @override
+  String get downloadCsv => 'Export CSV';
+
+  @override
+  String get exportFailed => 'Export failed';
+
+  @override
+  String get permissionDenied => 'Permission denied';
+
+  @override
+  String get currencySarShort => 'SAR';
+
+  @override
+  String get monthlyFeeShort => 'SAR/month';
+
+  @override
+  String get busGoTime => 'Go';
+
+  @override
+  String get busReturnTime => 'Return';
+
+  @override
+  String get busesCountFiltered => 'Buses (filtered)';
+
+  @override
+  String get awaitingPaymentCount => 'Awaiting payment';
+
+  @override
+  String get paidActiveCount => 'Active (paid)';
+
+  @override
+  String get estimatedMonthlyRevenue => 'Estimated monthly revenue';
+
+  @override
+  String get noBusChartData => 'No bus data to chart';
+
+  @override
+  String get activeSubscribersPerBus => 'Active subscribers per bus';
+
+  @override
+  String get awaitingPerBus => 'Awaiting payment per bus';
+
+  @override
+  String get activeShort => 'Active';
+
+  @override
+  String get awaitingShort => 'Awaiting';
+
+  @override
+  String get quickDetails => 'Quick details';
+
+  @override
+  String get activeSubscribers => 'Active subscribers';
+
+  @override
+  String get awaitingPayment => 'Awaiting payment';
+
+  @override
+  String get noItems => 'No items';
+
+  @override
+  String get parent => 'Parent';
+
+  @override
+  String get reference => 'Ref';
+
+  @override
+  String get exportBusCsv => 'Export bus enrollments CSV';
+
+  @override
+  String get busRequestsTitle => 'Bus Join Requests';
+
+  @override
+  String get busStatusPending => 'Pending';
+
+  @override
+  String get busStatusApprovedAwaitingPayment => 'Approved, awaiting payment';
+
+  @override
+  String get busStatusPaid => 'Active (paid)';
+
+  @override
+  String get busStatusRejected => 'Rejected';
+
+  @override
+  String get busStatusCancelled => 'Cancelled';
+
+  @override
+  String get searchStudentOrBus => 'Search by student / bus';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get noResults => 'No results';
+
+  @override
+  String get request => 'Request';
+
+  @override
+  String get paymentRef => 'Payment ref';
+
+  @override
+  String get paymentRefHint => 'e.g., TXN-12345';
+
+  @override
+  String get approve => 'Approve';
+
+  @override
+  String get reject => 'Reject';
+
+  @override
+  String get activatePaidManually => 'Activate manually (paid)';
+
+  @override
+  String get rejectAfterApproval => 'Reject after approval';
+
+  @override
+  String get noAction => 'No action';
+
+  @override
+  String get busManageTitle => 'Official Bus Management';
+
+  @override
+  String get addedBuses => 'Added buses';
+
+  @override
+  String get noBuses => 'No buses added yet';
+
+  @override
+  String get addBusHint => 'Use the form below to add a new bus';
+
+  @override
+  String get edit => 'Edit';
+
+  @override
+  String get addBus => 'Add bus';
+
+  @override
+  String get editBus => 'Edit bus';
+
+  @override
+  String get editMode => 'Edit mode';
+
+  @override
+  String get saveChanges => 'Save changes';
+
+  @override
+  String get busName => 'Bus name';
+
+  @override
+  String get routeDescription => 'Route description';
+
+  @override
+  String get goTimeLabel => 'Go';
+
+  @override
+  String get returnTimeLabel => 'Return';
+
+  @override
+  String get monthlyFee => 'Monthly fee';
+
+  @override
+  String get busSupervisorId => 'Bus supervisor ID';
+
+  @override
+  String get required => 'Required';
+
+  @override
+  String get invalidValue => 'Invalid value';
+
+  @override
+  String get invalidNumber => 'Invalid number';
+
+  @override
+  String get invalidTimeFormat => 'Invalid format, e.g. 06:45';
+
+  @override
+  String get invalidTime => 'Invalid time';
+
+  @override
+  String get selectOperatingDays => 'Please select operating days';
+
+  @override
+  String get addedSuccess => 'Added successfully';
+
+  @override
+  String get savedSuccess => 'Saved successfully';
+
+  @override
+  String get clearForm => 'Clear form';
+
+  @override
+  String get pickTime => 'Pick time';
+
+  @override
+  String get deleteBusTitle => 'Delete bus';
+
+  @override
+  String deleteBusConfirm(String name) {
+    return 'Are you sure you want to delete \"$name\"?';
+  }
+
+  @override
+  String get deleteAction => 'Delete';
+
+  @override
+  String get loadedForEdit => 'Bus data loaded for editing';
+
+  @override
+  String get weekdaySun => 'Sunday';
+
+  @override
+  String get weekdayMon => 'Monday';
+
+  @override
+  String get weekdayTue => 'Tuesday';
+
+  @override
+  String get weekdayWed => 'Wednesday';
+
+  @override
+  String get weekdayThu => 'Thursday';
+
+  @override
+  String get weekdayFri => 'Friday';
+
+  @override
+  String get weekdaySat => 'Saturday';
+
+  @override
+  String get manualEntry => 'Manual Entry';
+
+  @override
+  String get parentHomeTitle => 'My Children';
+
+  @override
+  String get currentTransport => 'Current Transport';
+
+  @override
+  String get noBusAssigned => 'No bus assigned yet';
+
+  @override
+  String get joinBus => 'Join a Bus';
+
+  @override
+  String get join => 'Join';
+
+  @override
+  String get parentBusJoinTitle => 'School Buses';
+
+  @override
+  String get searchHint => 'Search for a bus…';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get busStatusAwaitPayment => 'Awaiting payment';
+
+  @override
+  String get busStatusActive => 'Active';
+
+  @override
+  String get payAndActivate => 'Pay & Activate';
+
+  @override
+  String get refreshShort => 'Refresh';
+
+  @override
+  String get parentBusesTitle => 'School Buses';
+
+  @override
+  String get parentBusesSubtitle => 'Browse buses, request to join, manage payments';
+
+  @override
+  String get authorizedPeopleTitle => 'Authorized Pickups';
+
+  @override
+  String get authorizedPeopleSubtitle => 'Add and manage trusted people to pick up your child';
+
+  @override
+  String get active => 'Active';
+
+  @override
+  String get manage => 'Manage';
+
+  @override
+  String authorizedPeopleCount(int count) {
+    return 'Authorized people: $count';
+  }
+
+  @override
+  String get requestJoinBus => 'Request to Join';
+
+  @override
+  String get myBusRequests => 'My Bus Requests';
+
+  @override
+  String get paymentActivated => 'Payment completed. Enrollment activated.';
+
+  @override
+  String get statusAwaitingPayment => 'Awaiting Payment';
+
+  @override
+  String get statusActive => 'Active';
+
+  @override
+  String get statusCancelled => 'Cancelled';
+
+  @override
+  String get inactive => 'Inactive';
+
+  @override
+  String get noActiveBus => 'No active bus';
+
+  @override
+  String get addAuthorizedPerson => 'Add Authorized Person';
+
+  @override
+  String deleteConfirmName(String name) {
+    return 'Are you sure you want to delete \"$name\"?';
+  }
+
+  @override
+  String get deletedSuccess => 'Deleted successfully';
+
+  @override
+  String get phone => 'Phone';
+
+  @override
+  String get fullName => 'Full Name';
 }

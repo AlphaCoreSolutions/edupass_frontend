@@ -31,77 +31,101 @@ class AdminPanelScreen extends StatelessWidget {
           title: Text(tr.adminPanel),
           centerTitle: true,
         ),
-        body: allRequests.isEmpty
-            ? Center(child: Text(tr.noRequestsYet))
-            : ListView.builder(
-                padding: const EdgeInsets.all(16),
-                itemCount: allRequests.length,
-                itemBuilder: (_, index) {
-                  final req = allRequests[index];
-
-                  final student = students.firstWhere(
-                    (s) => s.id == req.studentId,
-                    orElse: () => StudentApi(
-                      id: -1,
-                      name: '-',
-                      grade: '-',
-                      idNumber: '',
-                      genderId: 0,
-                      imagePath: '',
+        body: Column(
+          children: [
+            // === Admin actions (top) ===
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+              child: Column(
+                children: [
+                  Card(
+                    child: ListTile(
+                      leading: const Icon(Icons.directions_bus_filled_outlined),
+                      title: const Text('الحافلات الرسمية / Official Buses'),
+                      subtitle: const Text('إدارة الحافلات، الجداول والرسوم'),
+                      onTap: () => context.push('/buses'),
                     ),
-                  );
-
-                  final requesterName =
-                      appState.userNameById(req.requestedById) ?? '-';
-
-                  final typeName = appState.detailName(req.requestTypeId);
-                  final statusName = appState.detailName(req.statusId);
-                  final reasonName = (req.reasonId != null)
-                      ? appState.detailName(req.reasonId!)
-                      : null;
-
-                  return Animate(
-                    effects: const [FadeEffect(), SlideEffect()],
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 3,
-                      margin: const EdgeInsets.only(bottom: 16),
-                      child: ListTile(
-                        contentPadding: const EdgeInsets.all(12),
-                        title: Text('${tr.studentName}: ${student.name}'),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text('${tr.requestType}: $typeName'),
-                            Text('${tr.requestStatus}: $statusName'),
-                            Text('${tr.requestedBy}: $requesterName'),
-                            if (reasonName != null &&
-                                reasonName.trim().isNotEmpty)
-                              Text('${tr.reason}: $reasonName'),
-                          ],
-                        ),
-                        trailing: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              _formatDate(req.time),
-                              style: const TextStyle(fontSize: 12),
-                            ),
-                            if (req.exitTime != null)
-                              Text(
-                                '${tr.exit}: ${_formatDate(req.exitTime!)}',
-                                style: const TextStyle(fontSize: 12),
-                              ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                  ),
+                ],
               ),
+            ),
+            const Divider(height: 1),
+            // === Requests list (below) ===
+            Expanded(
+              child: allRequests.isEmpty
+                  ? Center(child: Text(tr.noRequestsYet))
+                  : ListView.builder(
+                      padding: const EdgeInsets.all(16),
+                      itemCount: allRequests.length,
+                      itemBuilder: (_, index) {
+                        final req = allRequests[index];
+
+                        final student = students.firstWhere(
+                          (s) => s.id == req.studentId,
+                          orElse: () => StudentApi(
+                            id: -1,
+                            name: '-',
+                            grade: '-',
+                            idNumber: '',
+                            genderId: 0,
+                            imagePath: '',
+                          ),
+                        );
+
+                        final requesterName =
+                            appState.userNameById(req.requestedById) ?? '-';
+
+                        final typeName = appState.detailName(req.requestTypeId);
+                        final statusName = appState.detailName(req.statusId);
+                        final reasonName = (req.reasonId != null)
+                            ? appState.detailName(req.reasonId!)
+                            : null;
+
+                        return Animate(
+                          effects: const [FadeEffect(), SlideEffect()],
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            elevation: 3,
+                            margin: const EdgeInsets.only(bottom: 16),
+                            child: ListTile(
+                              contentPadding: const EdgeInsets.all(12),
+                              title: Text('${tr.studentName}: ${student.name}'),
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('${tr.requestType}: $typeName'),
+                                  Text('${tr.requestStatus}: $statusName'),
+                                  Text('${tr.requestedBy}: $requesterName'),
+                                  if (reasonName != null &&
+                                      reasonName.trim().isNotEmpty)
+                                    Text('${tr.reason}: $reasonName'),
+                                ],
+                              ),
+                              trailing: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    _formatDate(req.time),
+                                    style: const TextStyle(fontSize: 12),
+                                  ),
+                                  if (req.exitTime != null)
+                                    Text(
+                                      '${tr.exit}: ${_formatDate(req.exitTime!)}',
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

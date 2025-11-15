@@ -89,11 +89,93 @@ class GateSupervisorScreen extends StatelessWidget {
                         ),
                         trailing: ElevatedButton.icon(
                           onPressed: () async {
+                            final choice =
+                                await showModalBottomSheet<
+                                  Map<String, dynamic>
+                                >(
+                                  context: context,
+                                  builder: (sheetCtx) {
+                                    final auth = appState.authorizedForStudent(
+                                      student.id,
+                                    );
+                                    final studentBusIds = appState
+                                        .busIdsOfStudent(student.id);
+                                    return SafeArea(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          ListTile(
+                                            leading: const Icon(
+                                              Icons.person_outline,
+                                            ),
+                                            title: const Text(
+                                              'Parent / ولي الأمر',
+                                            ), // using inline label to avoid l10n changes
+                                            onTap: () =>
+                                                Navigator.pop(sheetCtx, {
+                                                  'type': 0,
+                                                  'id': request.requestedById,
+                                                }),
+                                          ),
+                                          if (auth.isNotEmpty)
+                                            const Divider(height: 1),
+                                          ...auth.map(
+                                            (p) => ListTile(
+                                              leading: const Icon(
+                                                Icons.verified_user_outlined,
+                                              ),
+                                              title: Text(
+                                                'Authorized: ${p.fullName}',
+                                              ),
+                                              subtitle: Text(p.phone),
+                                              onTap: () => Navigator.pop(
+                                                sheetCtx,
+                                                {'type': 1, 'id': p.id},
+                                              ),
+                                            ),
+                                          ),
+                                          if (studentBusIds.isNotEmpty)
+                                            const Divider(height: 1),
+                                          ...studentBusIds.map((bid) {
+                                            final b = appState.buses.firstWhere(
+                                              (x) => x.id == bid,
+                                              orElse: () =>
+                                                  appState.buses.first,
+                                            );
+                                            return ListTile(
+                                              leading: const Icon(
+                                                Icons.directions_bus_outlined,
+                                              ),
+                                              title: Text('Bus: ${b.name}'),
+                                              onTap: () => Navigator.pop(
+                                                sheetCtx,
+                                                {'type': 2, 'id': bid},
+                                              ),
+                                            );
+                                          }),
+                                          const SizedBox(height: 8),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+
+                            if (choice == null) return;
+
                             try {
+                              // complete the pickup request
                               await appState.updateRequestStatusId(
                                 request.id,
                                 DetailIds.completed, // ✅ Completed = 11
                               );
+
+                              // log who picked the student
+                              await appState.logDoorExit(
+                                studentId: student.id,
+                                pickedByType: choice['type'] as int,
+                                pickedById: choice['id'] as int?,
+                              );
+
                               if (context.mounted) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
