@@ -788,4 +788,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get fullName => 'Full Name';
+
+  @override
+  String get pleaseLogin => 'Please log in to continue';
+
+  @override
+  String get password => 'Password';
+
+  @override
+  String get invalidCredentials => 'Invalid credentials';
 }

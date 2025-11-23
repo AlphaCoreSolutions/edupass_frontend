@@ -788,4 +788,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get fullName => 'الاسم الكامل';
+
+  @override
+  String get pleaseLogin => 'سجّل الدخول للمتابعة';
+
+  @override
+  String get password => 'كلمة المرور';
+
+  @override
+  String get invalidCredentials => 'بيانات الدخول غير صحيحة';
 }

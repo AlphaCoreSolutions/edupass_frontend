@@ -24,36 +24,46 @@ class ParentBusJoinScreen extends StatelessWidget {
           title: Text('${tr.parentBusesTitle} / ${tr.parentBusesSubtitle}'),
           centerTitle: true,
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            if (buses.isEmpty)
-              Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                elevation: 0,
-                child: Padding(
-                  padding: const EdgeInsets.all(24),
-                  child: Center(
-                    child: Text(
-                      tr.noBuses,
-                      style: const TextStyle(fontWeight: FontWeight.bold),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            final app = context.read<AppState>();
+            // Pull fresh data from backend
+            await Future.wait([
+              app.loadBuses(),
+              app.loadBusEnrollments(parentUserId: parentUserId),
+            ]);
+          },
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              if (buses.isEmpty)
+                Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  elevation: 0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(24),
+                    child: Center(
+                      child: Text(
+                        tr.noBuses,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
+                )
+              else
+                ...buses.map(
+                  (b) => _BusCard(
+                    bus: b,
+                    canRequest: true,
+                    onTapJoin: () => _pickStudentAndRequestFlow(context, b),
+                  ),
                 ),
-              )
-            else
-              ...buses.map(
-                (b) => _BusCard(
-                  bus: b,
-                  canRequest: true,
-                  onTapJoin: () => _pickStudentAndRequestFlow(context, b),
-                ),
-              ),
-            const SizedBox(height: 16),
-            _EnrollmentsList(parentUserId: parentUserId),
-          ],
+              const SizedBox(height: 16),
+              _EnrollmentsList(parentUserId: parentUserId),
+            ],
+          ),
         ),
       ),
     );
@@ -245,6 +255,8 @@ class ParentBusJoinScreen extends StatelessWidget {
         busId: bus.id,
         parentUserId: parentUserId,
       );
+
+      await app.loadBusEnrollments(parentUserId: parentUserId);
 
       if (context.mounted) {
         // If you added the ARB with a placeholder: requestSent({id})

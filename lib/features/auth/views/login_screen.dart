@@ -6,7 +6,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../core/state/app_state.dart';
 import '../../../l10n/app_localizations.dart';
-import '../../../core/models/detail_ids.dart'; // backend role IDs
+import '../../../core/models/detail_ids.dart'; // role detail IDs
 import '../../../core/models/user.dart'; // UserApi
 
 class LoginScreen extends StatefulWidget {
@@ -18,25 +18,28 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
-  int _selectedRoleId = DetailIds.parent; // default tab = Parent
-  UserApi? _selectedUser;
+  final _formKey = GlobalKey<FormState>();
+  final _username = TextEditingController();
+  final _password = TextEditingController();
+
   bool _loading = false;
+  bool _obscure = true;
+  String? _error;
 
   @override
   void initState() {
     super.initState();
-    _bootstrap();
+    // optional: preload lookups to localize roles/statuses ASAP
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<AppState>().loadLookups();
+    });
   }
 
-  Future<void> _bootstrap() async {
-    setState(() => _loading = true);
-    final appState = context.read<AppState>();
-    try {
-      await appState.loadLookups(); // optional, but good to have early
-      await appState.loadUsers(); // load users for picker
-    } finally {
-      if (mounted) setState(() => _loading = false);
-    }
+  @override
+  void dispose() {
+    _username.dispose();
+    _password.dispose();
+    super.dispose();
   }
 
   void _routeForRole(BuildContext context, int roleId) {
@@ -55,29 +58,48 @@ class _LoginScreenState extends State<LoginScreen>
     }
   }
 
-  Future<void> _loginWithUser(BuildContext context, UserApi user) async {
-    final appState = context.read<AppState>();
-    await appState.loginAsRoleId(user.roleId);
-    appState.setCurrentUserId(user.id);
-    _routeForRole(context, user.roleId);
-  }
+  Future<void> _login() async {
+    final tr = AppLocalizations.of(context)!;
+    if (!_formKey.currentState!.validate()) return;
 
-  Future<void> _loginWithRoleOnly(BuildContext context, int roleId) async {
-    final appState = context.read<AppState>();
-    await appState.loginAsRoleId(roleId);
-    appState.setCurrentUserId(-1); // anonymous / no user selected
-    _routeForRole(context, roleId);
+    setState(() {
+      _loading = true;
+      _error = null;
+    });
+
+    try {
+      final app = context.read<AppState>();
+      // This should call your backend: POST /auth/login -> returns token + user
+      final UserApi me = await app.loginWithPassword(
+        _username.text.trim(),
+        _password.text,
+      );
+
+      // Save user id + role locally (AppState can also do this internally)
+      await app.setCurrentUserId(me.id);
+      await app.loginAsRoleId(me.roleId);
+
+      if (!mounted) return;
+      _routeForRole(context, me.roleId);
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+        _error = e.toString();
+      });
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(tr.invalidCredentials)));
+    } finally {
+      if (mounted) {
+        setState(() => _loading = false);
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final appState = context.watch<AppState>();
     final tr = AppLocalizations.of(context)!;
-
-    final users = appState.users;
-    final filteredUsers = users
-        .where((u) => u.roleId == _selectedRoleId)
-        .toList();
 
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -108,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen>
                                 ),
                           ).animate().fadeIn().slideY(begin: 0.5),
                           const SizedBox(height: 8),
-                          Text(tr.loginSelectRole).animate().fadeIn().slideY(
+                          Text(tr.pleaseLogin).animate().fadeIn().slideY(
                             begin: 0.5,
                             delay: 200.ms,
                           ),
@@ -116,103 +138,79 @@ class _LoginScreenState extends State<LoginScreen>
                       ),
                       const SizedBox(height: 24),
 
-                      // Role segmented selector
-                      _RoleSegmented(
-                        value: _selectedRoleId,
-                        onChanged: (v) {
-                          setState(() {
-                            _selectedRoleId = v;
-                            _selectedUser = null;
-                          });
-                        },
-                      ).animate().fadeIn(delay: 250.ms),
-
-                      const SizedBox(height: 12),
-
-                      // Users dropdown (filtered by role)
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 8,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.teal.withOpacity(0.06),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
+                      // Login form
+                      Form(
+                        key: _formKey,
+                        child: Column(
                           children: [
-                            const Icon(
-                              Icons.person,
-                              color: Colors.teal,
-                              size: 18,
+                            TextFormField(
+                              controller: _username,
+                              decoration: InputDecoration(
+                                labelText: tr.username,
+                                prefixIcon: const Icon(Icons.person_outline),
+                              ),
+                              textInputAction: TextInputAction.next,
+                              validator: (v) => (v == null || v.trim().isEmpty)
+                                  ? tr.required
+                                  : null,
                             ),
-                            const SizedBox(width: 8),
-                            Expanded(
-                              child: DropdownButtonHideUnderline(
-                                child: DropdownButton<UserApi>(
-                                  value: _selectedUser,
-                                  isExpanded: true,
-                                  hint: Text(tr.selectUser),
-                                  items: filteredUsers
-                                      .map(
-                                        (u) => DropdownMenuItem(
-                                          value: u,
-                                          child: Text(u.name),
-                                        ),
-                                      )
-                                      .toList(),
-                                  onChanged: (u) =>
-                                      setState(() => _selectedUser = u),
+                            const SizedBox(height: 12),
+                            TextFormField(
+                              controller: _password,
+                              decoration: InputDecoration(
+                                labelText: tr.password,
+                                prefixIcon: const Icon(Icons.lock_outline),
+                                suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _obscure
+                                        ? Icons.visibility_off
+                                        : Icons.visibility,
+                                  ),
+                                  onPressed: () =>
+                                      setState(() => _obscure = !_obscure),
                                 ),
                               ),
-                            ),
-                            IconButton(
-                              tooltip: tr.refresh,
-                              onPressed: () async {
-                                setState(() => _loading = true);
-                                try {
-                                  await context.read<AppState>().loadUsers();
-                                } finally {
-                                  if (mounted) setState(() => _loading = false);
-                                }
-                              },
-                              icon: const Icon(Icons.refresh, size: 18),
+                              obscureText: _obscure,
+                              validator: (v) =>
+                                  (v == null || v.isEmpty) ? tr.required : null,
+                              onFieldSubmitted: (_) => _login(),
                             ),
                           ],
                         ),
-                      ).animate().fadeIn(delay: 350.ms),
+                      ),
+                      if (_error != null) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          _error!,
+                          style: const TextStyle(
+                            color: Colors.red,
+                            fontSize: 12,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                      const SizedBox(height: 16),
 
-                      const SizedBox(height: 12),
-
-                      // Login buttons
-                      ElevatedButton.icon(
-                        onPressed: _selectedUser == null
-                            ? null
-                            : () => _loginWithUser(context, _selectedUser!),
+                      // Login button
+                      FilledButton.icon(
+                        onPressed: _login,
                         icon: const Icon(Icons.login),
                         label: Text(tr.login),
-                      ).animate().fadeIn(delay: 450.ms),
+                      ).animate().fadeIn(delay: 300.ms),
 
                       const SizedBox(height: 8),
 
-                      TextButton(
-                        onPressed: () =>
-                            _loginWithRoleOnly(context, _selectedRoleId),
-                        child: Text(tr.continueWithoutAccount),
-                      ).animate().fadeIn(delay: 550.ms),
-
-                      const SizedBox(height: 16),
-
-                      // Gate (no login role)
+                      // Gate shortcut
                       OutlinedButton.icon(
                         onPressed: () => context.go('/gate'),
                         icon: const Icon(Icons.door_front_door),
                         label: Text(tr.roleGate),
-                      ).animate().fadeIn(delay: 650.ms),
+                      ).animate().fadeIn(delay: 400.ms),
 
                       const SizedBox(height: 24),
 
-                      // Language switcher (compact)
+                      // Language switcher
                       Align(
                         alignment: Alignment.center,
                         child: Container(
@@ -257,83 +255,13 @@ class _LoginScreenState extends State<LoginScreen>
                               ),
                             ],
                           ),
-                        ).animate().fadeIn(delay: 750.ms),
+                        ).animate().fadeIn(delay: 500.ms),
                       ),
 
                       const Spacer(),
                     ],
                   ),
                 ),
-        ),
-      ),
-    );
-  }
-}
-
-class _RoleSegmented extends StatelessWidget {
-  final int value;
-  final ValueChanged<int> onChanged;
-  const _RoleSegmented({required this.value, required this.onChanged});
-
-  @override
-  Widget build(BuildContext context) {
-    final tr = AppLocalizations.of(context)!;
-
-    return LayoutBuilder(
-      builder: (context, c) {
-        return Row(
-          children: [
-            _seg(
-              context,
-              label: tr.roleParent,
-              selected: value == DetailIds.parent,
-              onTap: () => onChanged(DetailIds.parent),
-            ),
-            const SizedBox(width: 8),
-            _seg(
-              context,
-              label: tr.roleSupervisor,
-              selected: value == DetailIds.supervisor,
-              onTap: () => onChanged(DetailIds.supervisor),
-            ),
-            const SizedBox(width: 8),
-            _seg(
-              context,
-              label: tr.roleAdmin,
-              selected: value == DetailIds.admin,
-              onTap: () => onChanged(DetailIds.admin),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Widget _seg(
-    BuildContext context, {
-    required String label,
-    required bool selected,
-    required VoidCallback onTap,
-  }) {
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 12),
-          decoration: BoxDecoration(
-            color: selected ? Colors.teal : Colors.teal.withOpacity(0.08),
-            borderRadius: BorderRadius.circular(12),
-          ),
-          alignment: Alignment.center,
-          child: Text(
-            label,
-            style: TextStyle(
-              color: selected ? Colors.white : Colors.teal.shade800,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
         ),
       ),
     );

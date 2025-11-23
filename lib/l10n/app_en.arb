@@ -322,5 +322,8 @@
     },
     "deletedSuccess": "Deleted successfully",
     "phone": "Phone",
-    "fullName": "Full Name"
+    "fullName": "Full Name",
+    "pleaseLogin": "Please log in to continue",
+    "password": "Password",
+    "invalidCredentials": "Invalid credentials"
 }

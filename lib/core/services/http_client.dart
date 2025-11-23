@@ -9,9 +9,13 @@ import 'api_config.dart';
 class ApiHttpClient {
   final IOClient _client;
   final String baseUrl;
-  final String? token;
 
-  ApiHttpClient._(this._client, {required this.baseUrl, this.token});
+  // Make token mutable so we can set it after login
+  String? _token;
+  String? get token => _token;
+
+  ApiHttpClient._(this._client, {required this.baseUrl, String? token})
+    : _token = token;
 
   /// DEV ONLY: allow self-signed on localhost / 10.0.2.2
   factory ApiHttpClient.devInsecure({String? baseUrl, String? token}) {
@@ -36,11 +40,23 @@ class ApiHttpClient {
     );
   }
 
+  /// Set/clear bearer token at runtime (e.g., after login/logout)
+  void setToken(String? token) {
+    _token = token;
+    if (kDebugMode) {
+      debugPrint(
+        token == null
+            ? '[HTTP] Authorization token cleared'
+            : '[HTTP] Authorization token set (len=${token.length})',
+      );
+    }
+  }
+
   Uri _uri(String path, [Map<String, dynamic>? query]) =>
       Uri.parse('$baseUrl$path').replace(queryParameters: query);
 
   Map<String, String> _headers([Map<String, String>? override]) {
-    final h = ApiConfig.jsonHeaders(token: token);
+    final h = ApiConfig.jsonHeaders(token: _token);
     if (override != null) h.addAll(override);
     return h;
   }
@@ -69,6 +85,7 @@ class ApiHttpClient {
     Object? body,
     bool raw = false,
     Map<String, String>? headers,
+    bool rawStringBody = false, // kept for compatibility; unused
   }) async {
     final uri = _uri(path);
     final encoded = _prepareBody(body, raw: raw);

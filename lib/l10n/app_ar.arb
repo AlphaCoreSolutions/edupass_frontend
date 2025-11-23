@@ -323,5 +323,8 @@
             }
         }
     },
-    "deletedSuccess": "تم الحذف"
+    "deletedSuccess": "تم الحذف",
+    "pleaseLogin": "سجّل الدخول للمتابعة",
+    "password": "كلمة المرور",
+    "invalidCredentials": "بيانات الدخول غير صحيحة"
 }
